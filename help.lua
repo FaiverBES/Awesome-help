@@ -8,32 +8,47 @@ local capi = {
 	mouse = mouse,
 	screen = screen
 }
+--Here you might add your terminal (class, not a name)
+local termClass = { "UXTerm", "Xterm", "XTerm","Konslole", "URxvt", "Rxvt" }
 
 module("help")
 
--- функция получает имя запущенного приложения либо по c.class, либо опосредованно через получение c.pid
+local nf=nil
+-- get client name by c.class, or c.pid
 function getClientName(c)
 	local cname=nil
-	if c.class == "UXTerm" or c.class == "XTerm" then
+	if (isTerminal(c.class)) then
 		local temp =  tostring(awful.util.pread("pstree " ..tostring(c.pid).. " | awk -F \"---\" \'{ if(NF>3) {print $3} else {print $NF}}\'| sed -e \'$!d\' | awk -F \"-\" \'{if (NF>1) {print $2} else {print$1}}\'"))
 		local cend = string.find(temp,"\n", 1, true)
 		cname = string.sub (temp, 1, cend-1)		
 	else
 		cname = tostring(c.class)
 	end
-	local fname = "/home/faiver/.config/awesome/help/" .. cname     --заменить на свой путь до кталога(заменить username)
+	local fname = awful.util.getdir("config") .. "/help/data/" .. cname     --here you must change path, if not working
 	if awful.util.file_readable(fname) then
 		local myData = readFile(fname)
 		local myData = markupData (myData) 
-		naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=15,screen=capi.mouse.screen})
+		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
+		nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
 	else
-		naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Файл с подсказкой для: " .. cname.. " не найден" .. '</span>' ,screen=capi.mouse.screen})
+		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Файл с подсказкой для: " .. cname.. " не найден" .. '</span>' ,screen=capi.mouse.screen})
+		nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
 	end
 	
-	return cname
+	return nf
 end 
 
--- функция считывает файл
+--function verify, terminal or not
+function isTerminal(clientClass)
+	for _,v in pairs (termClass) do
+		if clientClass== v then
+			return true
+		end
+	end
+	return false
+end
+
+-- read data from file
 function readFile(file)
 	local fh = io.input (file)
 	local myStr = fh:read("*all")
@@ -41,13 +56,13 @@ function readFile(file)
 	return myStr
 end
 
---функция будет производить разметку
+--this function markup text
 function markupData (str)
 	local result,tmp = "",""
 	local markData= {}
 	local strLength = string.len(str)
 	local curPos, curLast, maxLength = 0,0,0
-	--разбивка переданной строки на подстроки по принципу в конце строки символ \n
+	--for more convenient processing, I separated the text for the lines ( \n)
 	while (curPos<strLength) 
 		do
 			curPos,_ = string.find (str,"\n",curPos)
@@ -64,7 +79,6 @@ function markupData (str)
 				curPos = curPos + 2
 			end
 	end
-	--выравнивание по центру (по символу -)
 	local posSubKey= nil
 	for k,v in  pairs (markData) do
 		posSubKey,_ = string.find (v, "-")
@@ -72,7 +86,7 @@ function markupData (str)
 			v = string.gsub (v, "-", "</span>-",1)
 			if (posSubKey < maxLength) then
 				local increm = maxLength - posSubKey
-				for  i=1,increm do
+				for  i=1,increm do  --align by center
 					v = " " .. v
 				end
 			end
