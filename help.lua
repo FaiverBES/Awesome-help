@@ -102,6 +102,7 @@ function markupData (str)
 	local posCentre= nil
 	for k,v in  pairs (str) do
 		posCentre,_ = string.find (v, "-")
+		v = replaceText(v)
 		if posCentre then
 			v = string.gsub (v, "-", "</span>-",1)
 			if (posCentre < maxLength) then
@@ -126,4 +127,23 @@ function markupData (str)
 			result = result .. v
 	end
 	return result
+end
+
+--this function replace symbol for using HTML <span>, such as < > / & etc.
+function replaceText(str)
+	if  string.find (str, "&") then
+		str = string.gsub (str, "&", '&amp;')
+	end
+	if  string.find (str, "<") then
+		str = string.gsub (str, "<", '&lt;')
+	end
+	if  string.find (str, ">") then
+		str = string.gsub (str, ">", '&gt;')
+	end
+	--[[
+	if  string.find (str, "/") then
+		str = string.gsub (str, "/", '&frasl;')
+	end  --]]
+
+	return str
 end
