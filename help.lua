@@ -9,6 +9,7 @@ local capi = {
 	screen = screen
 }
 
+local lang="en"          -- here change your language, don't forget create directory in 'data' folder
 local maxLength = 0      --variable for max length to '-'
 local nf=nil             -- index for notify
 
@@ -34,7 +35,7 @@ end
 
 --this function call from helpwwidget in rc.lua
 function displayHelp(cname)
-	local fname = awful.util.getdir("config") .. "/help/data/" .. cname     --here you must change path, if not working
+	local fname = awful.util.getdir("config") .. "/help/data/" .. lang .. "/" .. cname     --here you must change path, if not working
 	if awful.util.file_readable(fname) then
 		local myData = readFile(fname)
 		myData = splitStr (myData)
