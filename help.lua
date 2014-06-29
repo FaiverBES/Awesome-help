@@ -9,7 +9,7 @@ local capi = {
 	screen = screen
 }
 
-local lang="en"          -- here change your language, don't forget create directory in 'data' folder
+local lang="ru"          -- here change your language, don't forget create directory in 'data' folder
 local maxLength = 0      --variable for max length to '-'
 local nf=nil             -- index for notify
 
@@ -132,19 +132,8 @@ end
 
 --this function replace symbol for using HTML <span>, such as < > / & etc.
 function replaceText(str)
-	if  string.find (str, "&") then
-		str = string.gsub (str, "&", '&amp;')
-	end
-	if  string.find (str, "<") then
-		str = string.gsub (str, "<", '&lt;')
-	end
-	if  string.find (str, ">") then
-		str = string.gsub (str, ">", '&gt;')
-	end
-	--[[
-	if  string.find (str, "/") then
-		str = string.gsub (str, "/", '&frasl;')
-	end  --]]
-
+	str = string.gsub (str, "&", '&amp;')
+	str = string.gsub (str, "<", '&lt;')
+	str = string.gsub (str, ">", '&gt;')
 	return str
 end
