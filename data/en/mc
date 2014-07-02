@@ -16,7 +16,7 @@ Meta+h - Displays command history.
 Meta+g,Meta+r,Meta+j - Used to select the top/middle/bottom file in a panel repectively
 Meta+t - Change panel view ('Full','Brief','Long')
 Meta+Shift+? - Find file.
-Meta+Shift+A,Ctrl+x,Ctrl+p - Insert to command line inactive panel path.
+Ctrl+x,Ctrl+p - Insert to command line inactive panel path.
 Meta+Shift+H - Display directory history.
 Ctrl+\ - Display directory hotlist.
 Ctrl+l - Repaint all information in midnight commander.

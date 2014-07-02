@@ -9,7 +9,7 @@ local capi = {
 	screen = screen
 }
 
-local lang="ru"          -- here change your language, don't forget create directory in 'data' folder
+local lang="en"          -- here change your language, don't forget create directory in 'data' folder
 local maxLength = 0      --variable for max length to '-'
 local nf=nil             -- index for notify
 

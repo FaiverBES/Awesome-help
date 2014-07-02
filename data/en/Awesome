@@ -1,17 +1,17 @@
-==Изменение схемы==
+==Tags changing==
 Mod4+Button1 on tag - Tag current client with this tag only.
 Mod4+Button3 on tag - Toggle this tag for client.
 Button3 on tag - Add this tag to current view.
 Mod4+Button1 on client - Move window.
 Mod4+Button3 on client - Resize window.
-==Управление менеджером окон==
+==Control window manager==
 Mod4+Control+r - Restart awesome.
 Mod4+Shift+q - Quit awesome.
 Mod4+r - Run prompt.
 Mod4+x - Run Lua code prompt.
 Mod4+Return - Spawn terminal emulator.
 Mod4+w - Open main menu.
-==Клиенты==
+==Clients==
 Mod4+Shift+r - Redraw the focused window.
 Mod4+m - Maximize client.
 Mod4+n - Minimize client.
@@ -19,7 +19,7 @@ Mod4+Control+n - Restore minimazed client.
 Mod4+f - Set client fullscreen.
 Mod4+Shift+c - Kill focused client.
 Mod4+t - Mark a client.
-==Навигация==
+==Navigation==
 Mod4+j - Focus next client.
 Mod4+k - Focus previous client.
 Mod4+u - Focus first urgent client.
@@ -29,7 +29,7 @@ Mod4+1..9 - Switch to tag 1-9.
 Mod4+Control+j - Focus next screen.
 Mod4+Control+k - Focus previous screen.
 Mod4+Escape - Focus previously selected tag set.
-==Изменение схемы==
+==Change layout==
 Mod4+Shift+j - Switch client with next client.
 Mod4+Shift+k - Switch client with previous client.
 Mod4+o - Send client to next screen.
