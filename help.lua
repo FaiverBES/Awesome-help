@@ -43,14 +43,13 @@ function displayHelp(cname)
 		local myData = readFile(fname)
 		myData = splitStr (myData)
 		myData = markupData(myData)
+		--if you are using awesome 3.4 you can uncomment next line, and comment next
 		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
-		--if you are using awesome 3.4 you can uncomment next line, and comment next
 		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
-		--if you are using awesome 3.4 you can uncomment next line, and comment next
-		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
-		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
 		nf = naughty.notify ({title = "Help for:      " .. cname, text = myData, timeout=60,screen=capi.mouse.screen})
 	else
+		--if you are using awesome 3.4 you can uncomment next line, and comment next
+		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
 		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Файл с подсказкой для: " .. cname.. " не найден" .. '</span>' ,screen=capi.mouse.screen})
 		nf = naughty.notify ({title = "Can't find help file for: " .. cname  ,screen=capi.mouse.screen})
 	end
