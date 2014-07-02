@@ -13,8 +13,8 @@ local lang="ru"          -- here change your language, don't forget create direc
 local maxLength = 0      --variable for max length to '-'
 local nf=nil             -- index for notify
 
---Here you might add your terminal (class, not a name)
-local termClass = { "UXTerm", "Xterm", "XTerm","Konslole", "URxvt", "Rxvt" }
+--Here you might add your terminal (class, not a name), but "X-terminal-emulator" not supported(script failed)
+local termClass = { "UXTerm", "Xterm", "XTerm","Konslole", "URxvt", "Rxvt"}
 
 module("help")
 
@@ -26,6 +26,9 @@ function getClientName(c)
 		local temp =  tostring(awful.util.pread("pstree " ..tostring(c.pid).. " | awk -F \"---\" \'{ if(NF>3) {print $3} else {print $NF}}\'| sed -e \'$!d\' | awk -F \"-\" \'{if (NF>1) {print $2} else {print$1}}\'"))
 		local cend = string.find(temp,"\n", 1, true)
 		cname = string.sub (temp, 1, cend-1)		
+	elseif (tostring(c.class)=="X-terminal-emulator") then
+		naughty.notify({text = tostring(c.name) })
+		cname=string.gsub(c.name, "~ : ", "")
 	else
 		cname = tostring(c.class)
 	end
@@ -41,10 +44,15 @@ function displayHelp(cname)
 		myData = splitStr (myData)
 		myData = markupData(myData)
 		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
-		nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
+		--if you are using awesome 3.4 you can uncomment next line, and comment next
+		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
+		--if you are using awesome 3.4 you can uncomment next line, and comment next
+		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
+		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
+		nf = naughty.notify ({title = "Help for:      " .. cname, text = myData, timeout=60,screen=capi.mouse.screen})
 	else
 		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Файл с подсказкой для: " .. cname.. " не найден" .. '</span>' ,screen=capi.mouse.screen})
-		nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
+		nf = naughty.notify ({title = "Can't find help file for: " .. cname  ,screen=capi.mouse.screen})
 	end
 	return nf
 end
