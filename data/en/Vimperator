@@ -1,0 +1,79 @@
+==Scrolling==
+j/k - scroll window down/up by one line, respectively
+h/l - scroll window left/right
+Space/Ctrl+f - scroll down by one page
+Shift+Space/Ctrl+b - scroll up by one page
+Ctrl+d/Ctrl+u - scroll down/up by 1/2 page
+==History and tabs==
+Ctrl+o/Ctrl+i - move Back/Forward in the current window/tab's history, respectively
+gt/Ctrl+n - go to the next tab
+gT/Ctrl+p - go to the previous tab
+g0/g$ - go to the first/last tab
+d - close the active tab (delete the buffer)
+t/:tabopen vimperator.org - To open a web page in a new tab, use the :tabopen url.
+o/:open my.webmail.com - Open a web page in current tab
+==QuickHint mode==
+f - will open the resulting link in the current tab, while the upper-case
+F - will open it in a new tab.
+:bmark/:bmarks - will add a new bookmark/will list the bookmarks currently defined.
+:emenu - Access the Iceweasel menus through the Vimperator command line.
+:dia[log] - Open a Iceweasel dialog.
+:downl[oads] - Show progress of current downloads.
+==Browsing==
+Shift+Esc/Insert - Disable all Vimperator keys and pass them to the next event handler.
+i - If you only need to pass a single key
+I - Opens an :ignorekeys add  command to quickly add the current host
+==Opening web pages==
+T - Show a :tabopen prompt containing the current URL.
+O - Show an :open prompt containing the current URL.
+p - Open (put) a URL based on the current clipboard contents in the current buffer.
+P - Open (put) a URL based on the current clipboard contents in a new buffer.
+==Navigating==
+CTRL+O/H/:back/:ba[ck]! - Go [count] pages back in the browser history.
+CTRL+i/L/:fo/:fw/:forward - Go [count] pages forward in the browser history.
+:hs:hist:history:hist[ory] - Show recently visited URLs.
+:ju:jumps:ju[mps] - List all jumps aka current tab's history aka session history
+gu - Go to [count]th parent directory.
+gU - Go to the root of the web site.
+==Reloading==
+r - Force reloading of the current web page.
+R - Force reloading of the current web page skipping the cache.
+:re/:reload/:re[load][!] - Reload current web page.
+:reloada:reloadall:reloada[ll][!] - Reload all pages.
+==Motion commands==
+^/0 - Scroll to the absolute left of the document.
+$ - Scroll to the absolute right of the document
+Home/gg - Go to the top of the document.
+End/G - Go to the end of the document.
+%{count} - Scroll to {count} percent of the document.
+Tab - Advance keyboard focus to the next element.
+Shift+Tab - Rewind keyboard focus to the previous element.
+gi - Focus last used input field.
+==Zooming==
+zi - Enlarge text zoom of current web page. Mnemonic: zoom in.
+zo - Reduce text zoom of current web page. Mnemonic: zoom out.
+zr - Reduce text zoom of current web page by a larger amount. Mnemonic: zoom reduce.
+==Copying text==
+y - Yank current location to the clipboard.
+Y - Copy currently selected text to the system clipboard.
+==Command-line mode==
+Ctrl+c - Quit Command-line mode without executing.
+Up - Recall the previous command line from the history list
+Down - Recall the next command line from the history list
+Shift+Up/PageUp - Recall the previous command line from the history list.
+Shift+Down/PageDown - Recall the next command line from the history list.
+Tab - Complete the word in front of the cursor
+Shift+Tab - Complete the previous full match when 'wildmode' contains "full".
+==QuickMarks==
+go a-zA-Z0-9 - Jump to a QuickMark in the current tab.
+gn a-zA-Z0-9 - Jump to a QuickMark in a new tab.
+M a-zA-Z0-9 - Add new QuickMark for current URL.
+:delqm:delqmarksmarks:delqm[arks]! - Delete the specified QuickMarks.
+:qma:qmarka-zA-Z0-9 - Mark a URL with a letter for quick access.
+:qmarks:qmarks [arg] - Show all QuickMarks.
+==Local marks==
+ma-zA-Z - Set mark at the cursor position.
+`'a-zA-Z - Jump to the mark.
+:delm:delmarksmarks:delm[arks]! - Delete the specified marks.
+:ma:marka-zA-Z - Mark current location within the web page.
+:marks:marks [arg] - Show all location marks of the current web page.

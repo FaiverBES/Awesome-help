@@ -9,7 +9,7 @@ local capi = {
 	screen = screen
 }
 
-local lang="en"          -- here change your language, don't forget create directory in 'data' folder
+local lang="ru"          -- here change your language, don't forget create directory in 'data' folder
 local maxLength = 0      --variable for max length to '-'
 local nf=nil             -- index for notify
 
@@ -41,12 +41,13 @@ function displayHelp(cname)
 	local fname = awful.util.getdir("config") .. "/help/data/" .. lang .. "/" .. cname     --here you must change path, if not working
 	if awful.util.file_readable(fname) then
 		local myData = readFile(fname)
+		maxLength=0
 		myData = splitStr (myData)
 		myData = markupData(myData)
 		--if you are using awesome 3.4 you can uncomment next line, and comment next
-		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
+		nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Подсказка для:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
 		--nf = naughty.notify ({title = '<span weight="bold" color="#00FF00">' .. "Help for:      " .. cname .. '</span>', text = myData, timeout=60,screen=capi.mouse.screen})
-		nf = naughty.notify ({title = "Help for:      " .. cname, text = myData, timeout=60,screen=capi.mouse.screen})
+		--nf = naughty.notify ({title = "Help for:      " .. cname, text = myData, timeout=60,screen=capi.mouse.screen})
 	else
 		--if you are using awesome 3.4 you can uncomment next line, and comment next
 		--nf = naughty.notify ({title = '<span weight="bold" color="#FF0000">' .. "Can't find help file for: " .. cname .. '</span>' ,screen=capi.mouse.screen})
