@@ -2,6 +2,7 @@ local awful = require ("awful")
 local naughty = require("naughty")
 local string = string
 local tostring = tostring
+local table = table
 local io = io
 local pairs = pairs
 local capi = {
@@ -144,4 +145,29 @@ function replaceText(str)
 	str = string.gsub (str, "<", '&lt;')
 	str = string.gsub (str, ">", '&gt;')
 	return str
+end
+
+--меню для Awesome-help
+function helpMenuGenerate()
+	helpItems = {}
+	local configDir = awful.util.getdir ("config") 
+	local helpFile = awful.util.pread ("ls -1 ".. configDir .. "/help/data/"..lang )
+	local mycurPos = 0
+	local mycurLast = 0
+	local tmp = ""
+	local helpMenuItems = {}
+	local myFiles = {}
+	while (mycurPos)
+		do
+			mycurPos,_ = string.find (helpFile,"\n",mycurPos)
+			if mycurPos then
+				tmp = string.sub (helpFile, mycurLast+1, mycurPos-1)
+				helpItems[#helpItems+1] = tmp
+				table.insert ( helpMenuItems, {tmp, function (tmp) displayHelp(tmp) end  })
+				mycurLast = mycurPos
+				mycurPos = mycurPos +1
+			end
+		end
+	helpMenu=awful.menu ({items=helpMenuItems })
+	return helpMenu
 end
