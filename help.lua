@@ -157,13 +157,17 @@ function helpMenuGenerate()
 	local tmp = ""
 	local helpMenuItems = {}
 	local myFiles = {}
+	local function genaction(fname)
+		f = function() displayHelp(fname) end
+		return f
+	end
 	while (mycurPos)
 		do
 			mycurPos,_ = string.find (helpFile,"\n",mycurPos)
 			if mycurPos then
 				tmp = string.sub (helpFile, mycurLast+1, mycurPos-1)
 				helpItems[#helpItems+1] = tmp
-				table.insert ( helpMenuItems, {tmp, function (tmp) displayHelp(tmp) end  })
+				table.insert ( helpMenuItems, {tmp, genaction(tmp) })
 				mycurLast = mycurPos
 				mycurPos = mycurPos +1
 			end
